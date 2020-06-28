@@ -3,85 +3,74 @@ import './App.css';
 
 const API_KEY = 'HAzNETw6VUoq4BIZ0KikSObCBP0xe0gMSbbYaubP';
 
-/*let [state, setState] = useState(false, {});
-
-useEffect((props) => {
-  console.log(props);
-});
-*/
-
 class ApodDetail extends React.Component {
+    render() {
+        const {copyright, date, explanation, hdurl, media_type, service_version, title, url} = this.props.state;
 
-  render() {
-    console.log('props', this.props);
+        let apodStyle = {
+            backgroundImage: `url(${hdurl})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100%"
+        }
 
-    const {copyright, date, explanation, hdurl, media_type, service_version, title, url} = this.props.state;
-    console.log('copyright', copyright);
-    return (
-      <>
-           <h2>Copyright</h2>
-        <p>{copyright}</p>
-        <h2>date</h2>
-        <p>{date}</p>
-        <h2>explanation</h2>
-        <p>{explanation}</p>
-        <h2>hdurl</h2>
-        <p>{hdurl}</p>
-        <h2>media_type</h2>
-        <p>{media_type}</p>
-        <h2>service_version</h2>
-        <p>{service_version}</p>
-        <h2>title</h2>
-        <p>{title}</p>
-        <h2>url</h2>
-        <p>{url}</p>
-        <img src={url} alt={title}></img> 
-   
-      </>
-    );
-  }
-};
+        /*- div className="apod"><img src={url} alt={title}/></div */
+        return (
+            <div className="App-body" style={apodStyle}>
+
+                <p>{title}</p>
+
+                <p><b>Copyright</b>: {copyright}</p>
+
+                <p><b>Date</b>: {date}</p>
+
+                <p><b>Explanation</b>: {explanation}</p>
+
+                <p><b>Media Type</b>: {media_type}</p>
+
+                <p><b>Service Version</b>: {service_version}</p>
+                <p><b>url</b>: {url}</p>
+                <p><b>hd url</b>: {hdurl}</p>
+
+            </div>
+        );
+    }
+}
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    componentDidMount() {
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log('result', result);
+                    this.setState(result);
+                },
+                (error) => {
+                    this.setState(error);
+                }
+            )
     };
-  }
 
-  componentDidMount() {
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log('result', result);
-          this.setState( result );
-        },
-        (error) => {
-          this.setState( error );
-        }
-      )
-  };
+    render() {
+        // const str = JSON.stringify(this.state);
+        return (
+            <>
+                <div className="App">
+                    <header className="App-header">
+                        <h1>Astronomy Photo of the Day</h1>
+                        <ApodDetail state={this.state}/>
+                    </header>
+                </div>
+            </>
+        );
+    }
 
-  render() {
-    const str = JSON.stringify(this.state);
-    return (
-      <>
-        <div className="App">
-          <header className="App-header">
-            <h1>APOD</h1>
-            <p>{str}</p>
-
-            <ApodDetail state={this.state}></ApodDetail>
-
-          </header>
-        </div>
-      </>
-    );
-  }
-
-};
-
+}
 
 export default App;
