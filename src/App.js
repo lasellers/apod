@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 
-const API_KEY = 'HAzNETw6VUoq4BIZ0KikSObCBP0xe0gMSbbYaubP';
-
 class ApodDetail extends React.Component {
     render() {
         const {copyright, date, explanation, hdurl, media_type, service_version, title, url} = this.props.state;
@@ -44,11 +42,10 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env["REACT_APP_API_KEY"]}`)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('result', result);
                     this.setState(result);
                 },
                 (error) => {
@@ -58,7 +55,6 @@ class App extends React.Component {
     };
 
     render() {
-        // const str = JSON.stringify(this.state);
         return (
             <>
                 <div className="App">
