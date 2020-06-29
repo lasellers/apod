@@ -20,4 +20,4 @@ Launches the test runner in the interactive watch mode.
 
 Builds the app for production to the `build` folder.
 
-![Apod](https://github.com/lasellers/apod/blob/master/public/apod.jpg)
+![Apod](https://github.com/lasellers/apod/blob/master/apod.jpg)
