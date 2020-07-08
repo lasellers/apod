@@ -5,29 +5,20 @@ class ApodDetail extends React.Component {
     render() {
         const {copyright, date, explanation, hdurl, media_type, service_version, title, url} = this.props.state;
 
-        let apodStyle = {
-            backgroundImage: `url(${hdurl})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "100%"
-        }
-
-        /*- div className="apod"><img src={url} alt={title}/></div */
         return (
-            <div className="App-body" style={apodStyle}>
+            <div>
+                <div className="apod-text-overlay">
+                    <p>{title}</p>
+                    <p><b>Copyright</b>: {copyright}</p>
+                    <p><b>Date</b>: {date}</p>
+                    <p><b>Explanation</b>: {explanation}</p>
+                    <p><b>Media Type</b>: {media_type}</p>
+                    <p><b>Service Version</b>: {service_version}</p>
+                    <p><b>Url</b>: {url}</p>
+                    <p><b>HD Url</b>: {hdurl}</p>
+                </div>
 
-                <p>{title}</p>
-
-                <p><b>Copyright</b>: {copyright}</p>
-
-                <p><b>Date</b>: {date}</p>
-
-                <p><b>Explanation</b>: {explanation}</p>
-
-                <p><b>Media Type</b>: {media_type}</p>
-
-                <p><b>Service Version</b>: {service_version}</p>
-                <p><b>url</b>: {url}</p>
-                <p><b>hd url</b>: {hdurl}</p>
+                <div className="apod"><img src={hdurl} alt={title}/></div>
 
             </div>
         );
@@ -60,8 +51,10 @@ class App extends React.Component {
                 <div className="App">
                     <header className="App-header">
                         <h1>Astronomy Photo of the Day</h1>
-                        <ApodDetail state={this.state}/>
                     </header>
+                    <div className="App-body">
+                        <ApodDetail state={this.state}/>
+                    </div>
                 </div>
             </>
         );
