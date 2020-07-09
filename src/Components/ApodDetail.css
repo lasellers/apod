@@ -1,0 +1,15 @@
+.apod-text-overlay {
+    position: absolute;
+    top: 6ex;
+    z-index: 101;
+}
+.apod {
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 6ex;
+    z-index: 100;
+}
+.apod img {
+    width: 100%;
+}
